@@ -15,7 +15,12 @@ smbuscmds.setallhigh() #assert all high
 
 
 #read and save gnd reference values
-
+refi2 = spicmds.readi2()
+refv2 = spicmds.readv2()
+refv3 = spicmds.readv3()
+refx8 = spicmds.readx8()
+refv1 = spicmds.readv1()
+refi1 = spicmds.readi1()
 
 #deasert all relays
 smbuscmds.setalllow() #deasserts all relays
