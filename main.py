@@ -1,2 +1,19 @@
-print("test")
-#this is a test for commit and merging of branches
+import testselect
+
+wattage = input("Enter Wattage of Power Supply: ")
+date = input("Enter Date: ")
+user = input("Enter User: ")
+serial = input("Enter Serial Number: ")
+
+tests, load, eff, volt = testselect.testsel()
+
+
+
+
+
+
+
+
+
+
+
