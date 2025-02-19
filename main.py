@@ -2,6 +2,7 @@
 import time
 import testselect
 import initialization
+import control
 
 wattage = input("Enter Wattage of Power Supply: ")
 date = input("Enter Date: ")
