@@ -81,7 +81,7 @@ def readv2():
 def readv3():
     return readadc(2)
 
-def readx8():
+def readpsok():
     return readadc(3)
 
 def readv1():
