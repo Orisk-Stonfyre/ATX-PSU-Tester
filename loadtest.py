@@ -1,6 +1,10 @@
+from os import waitpid
+
 import  control
 import time
 import spicmds
+from control import deasertpson
+
 
 def asert400full():
     control.asertb1load()
@@ -278,6 +282,10 @@ low_map = {
 }
 
 def runloadtest(wattage, loadselect):
+    estop = 0
+    fullvoltage=0
+    medvoltage=0
+    lowvoltage=0
     if ((loadselect >> 2) & 1) == 1:
         control.deasertallrelays()
         print("Running Low Load Test:")
@@ -285,10 +293,76 @@ def runloadtest(wattage, loadselect):
         print("Load Aserted")
         control.asert12vrelays()
         print("Relays Aserted")
-
         control.asertpson()
-    if ((loadselect >> 1) & 1) == 1:
-        print("Medium Load is selected.")
-    if ((loadselect >> 0) & 1) == 1:
-        print("Full Load is selected.")
-    return
+        print("Power Aserted")
+        time.sleep(.5)
+        psok = spicmds.readpsok()
+        if psok == 5:
+            print("Power Nominal")
+            print("Measuring load")
+            lowvoltage = spicmds.readv2()
+            print(lowvoltage)
+            control.deasertpson()
+            print("Power Down")
+            control.deasert12vrelays()
+            control.deasertload()
+            print("Relays Deaserted")
+            print("Load Deaserted")
+        else:
+            control.deasertpson()
+            estop = 1
+            print("Fatal Error : All Tests Stopped : Power Supply Unstable")
+
+    if (((loadselect >> 1) & 1) == 1) & estop ==0:
+        control.deasertallrelays()
+        print("Running Med Load Test:")
+        med_map[wattage]()
+        print("Load Aserted")
+        control.asert12vrelays()
+        print("Relays Aserted")
+        control.asertpson()
+        print("Power Aserted")
+        time.sleep(.5)
+        psok = spicmds.readpsok()
+        if psok == 5:
+            print("Power Nominal")
+            print("Measuring load")
+            medvoltage = spicmds.readv2()
+            print(medvoltage)
+            control.deasertpson()
+            print("Power Down")
+            control.deasert12vrelays()
+            control.deasertload()
+            print("Relays Deaserted")
+            print("Load Deaserted")
+        else:
+            control.deasertpson()
+            estop = 1
+            print("Fatal Error : All Tests Stopped : Power Supply Unstable")
+    if (((loadselect >> 0) & 1) == 1) & estop ==0:
+        control.deasertallrelays()
+        print("Running Med Load Test:")
+        full_map[wattage]()
+        print("Load Aserted")
+        control.asert12vrelays()
+        print("Relays Aserted")
+        control.asertpson()
+        print("Power Aserted")
+        time.sleep(.5)
+        psok = spicmds.readpsok()
+        if psok == 5:
+            print("Power Nominal")
+            print("Measuring load")
+            fullvoltage = spicmds.readv2()
+            print(fullvoltage)
+            control.deasertpson()
+            print("Power Down")
+            control.deasert12vrelays()
+            control.deasertload()
+            print("Relays Deaserted")
+            print("Load Deaserted")
+        else:
+            control.deasertpson()
+            estop = 1
+            print("Fatal Error : All Tests Stopped : Power Supply Unstable")
+    return estop, fullvoltage, medvoltage, lowvoltage

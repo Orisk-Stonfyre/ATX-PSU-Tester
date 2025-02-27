@@ -174,9 +174,9 @@ def asertpin14():
 def deasertpin14():
     smbuscmds.updatepin(1, "b", 2, 0)  # 1-3
 
-def asertpin16():
+def asertpson():
     smbuscmds.updatepin(1,"b",0,1)#1-1
-def deasertpin16():
+def deasertpson():
     smbuscmds.updatepin(1, "b", 0, 0)  # 1-1
 
 def asertpin20():
@@ -198,3 +198,4 @@ def asertpin23():
     smbuscmds.updatepin(1,"b",6,1)#1-7
 def deasertpin23():
     smbuscmds.updatepin(1, "b", 6, 0)  # 1-7
+
