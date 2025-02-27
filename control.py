@@ -87,6 +87,18 @@ def asertb10load():
 def deasertb10load():
     smbuscmds.updatepin(3, "a", 7, 0)  # pin 3-28
 
+def deasertload():
+    deasertb1load()
+    deasertb2load()
+    deasertb3load()
+    deasertb4load()
+    deasertb5load()
+    deasertb6load()
+    deasertb7load()
+    deasertb8load()
+    deasertb9load()
+    deasertb10load()
+
 def asertr1load():
     smbuscmds.updatepin(3,"b",7,1)#pin 3-8
 def deasertr1load():
@@ -186,3 +198,4 @@ def asertpin23():
     smbuscmds.updatepin(1,"b",6,1)#1-7
 def deasertpin23():
     smbuscmds.updatepin(1, "b", 6, 0)  # 1-7
+

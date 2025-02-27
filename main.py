@@ -7,7 +7,6 @@ import CapacitanceTest
 import loadtest
 import os
 
-
 temp=0
 while 0 == temp:
     wattage = input("Enter Wattage of Power Supply: \n 400\n430\n500\n550\n600\n650\n700\n750\n800\n850\n900\n950\n1000")
@@ -50,7 +49,6 @@ estop = 0
 
 tests, load, eff, volt = testselect.testsel()
 passedtests = 0
-
 
 if ((tests >> 4) & 1) == 1:
     captest = CapacitanceTest.capacitancetest()
