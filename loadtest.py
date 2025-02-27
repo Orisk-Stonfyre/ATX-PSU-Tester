@@ -286,6 +286,7 @@ def runloadtest(wattage, loadselect):
     fullvoltage=0
     medvoltage=0
     lowvoltage=0
+    pf =1
     if ((loadselect >> 2) & 1) == 1:
         control.deasertallrelays()
         print("Running Low Load Test:")
@@ -308,6 +309,11 @@ def runloadtest(wattage, loadselect):
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
+            if lowvoltage != 1: #needs corrected
+                pf = 0
+                print("Low Load Test Failed")
+            else:
+                print("Low Load Test Nominal")
         else:
             control.deasertpson()
             estop = 1
@@ -335,6 +341,11 @@ def runloadtest(wattage, loadselect):
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
+            if medvoltage != 1: #needs corrected
+                pf = 0
+                print("Med Load Test Failed")
+            else:
+                print("Med Load Test Nominal")
         else:
             control.deasertpson()
             estop = 1
@@ -361,8 +372,14 @@ def runloadtest(wattage, loadselect):
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
+            if fullvoltage != 1: #needs corrected
+                pf = 0
+                print("Full Load Test Failed")
+            else:
+                print("Full Load Test Nominal")
         else:
             control.deasertpson()
             estop = 1
             print("Fatal Error : All Tests Stopped : Power Supply Unstable")
-    return estop, fullvoltage, medvoltage, lowvoltage
+
+    return estop, pf, fullvoltage, medvoltage, lowvoltage
