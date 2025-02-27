@@ -3,6 +3,7 @@ import time
 import testselect
 import initialization
 import control
+import CapacitanceTest
 import loadtest
 import os
 
@@ -47,10 +48,14 @@ serial = input("Enter Serial Number: ")
 estop = 0
 
 tests, load, eff, volt = testselect.testsel()
+passedtests = 0
 
-if estop == 0:
-    estop, fulload, medload, lowload = loadtest.runloadtest(wattage,load)
+if ((tests >> 4) & 1) == 1:
+    captest = CapacitanceTest.capacitancetest()
+    if captest == 1:
+        passedtests |= 0b10000
 
-
-
-
+if (((tests >> 3) & 1) == 1) & estop == 0:
+    estop, pf, fulload, medload, lowload = loadtest.runloadtest(wattage, load)
+    if pf == 1:
+        passedtests |= 0b01000
