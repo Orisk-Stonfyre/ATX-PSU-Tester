@@ -60,15 +60,11 @@ def printvolt(volt):
         print("Pin 22 is selected.")
     if ((volt >> 2) & 1) == 1:
         print("Pin 23 is selected.")
-    if ((volt >> 1) & 1) == 1:
-        print("Pin 3a is selected.")
-    if ((volt >> 0) & 1) == 1:
-        print("Pin 4a is selected.")
     if volt == 0b001110000011100:
         print("All 5v pins are selected.")
     if volt == 0b110000011000000:
         print("All 3.3v pins are selected.")
-    if volt == 0b000001100100011:
+    if volt == 0b000001100100000:
         print("All 12v pins are selected.")
 
 def testsel():
@@ -139,13 +135,13 @@ def testsel():
                 print("Invalid input please select a valid load or q to quit")
     os.system('cls' if os.name == 'nt' else 'clear')
     val = ''
-    volt = 0
-    if ((tests >> 0) & 1) == 1:
+    volt = 0 #made an error and added 2 pins that dont exist in bit 0 and 1 deleted them but left bit if needed later so last 2 bits always 0
+    if ((tests >> 0) & 1) == 1: #may also need to redo the pinout or ad diffrent configs basedon connector type, asumine std 24 pin connector
         while val.lower() != 'q':
             os.system('cls' if os.name == 'nt' else 'clear')
             printvolt(volt)
             print("\n")
-            val = input("Voltage Test Configuration (By pin #)\n 1: +3.3v\n 2: +3.3v\n 4: +5v\n 6: +5v\n 9: +5v (Standby)\n 10: +12v\n 11: +12v\n 12: +3.3v\n 13: +3.3v\n 14: -12v\n 21: +5v\n 22: +5v\n 23: +5v\n 3a: +12v\n 4a: +12v\n 5v: All 5v Pins\n 3.3v: All 3.3v Pins\n 12v: all 12v Pins\n a: All Pins\n r: reset Selected Pins\n q: Quit Selection\n")
+            val = input("Voltage Test Configuration (By pin #)\n 1: +3.3v\n 2: +3.3v\n 4: +5v\n 6: +5v\n 9: +5v (Standby)\n 10: +12v\n 11: +12v\n 12: +3.3v\n 13: +3.3v\n 14: -12v\n 21: +5v\n 22: +5v\n 23: +5v\n 5v: All 5v Pins\n 3.3v: All 3.3v Pins\n 12v: all 12v Pins\n a: All Pins\n r: reset Selected Pins\n q: Quit Selection\n")
             if val == '1':
                 volt |= 0b100000000000000
             elif val == '2':
@@ -172,18 +168,14 @@ def testsel():
                 volt |= 0b000000000001000
             elif val == '23':
                 volt |= 0b000000000000100
-            elif val == '3a':
-                volt |= 0b000000000000010
-            elif val == '4a':
-                volt |= 0b000000000000001
             elif val == '5v':
                 volt |= 0b001110000011100
             elif val == '3.3v':
                 volt |= 0b110000011000000
             elif val == '12v':
-                volt |= 0b000001100100011
+                volt |= 0b000001100100000
             elif val == 'a':
-                volt |= 0b111111111111111
+                volt |= 0b111111111111100
             elif val == 'r':
                 volt = 0
             elif val.lower() != 'q':
