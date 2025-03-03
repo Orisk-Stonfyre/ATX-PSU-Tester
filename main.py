@@ -59,3 +59,8 @@ if (((tests >> 3) & 1) == 1) & estop == 0:
     estop, pf, fulload, medload, lowload = loadtest.runloadtest(wattage, load)
     if pf == 1:
         passedtests |= 0b01000
+
+if (((tests >> 2) & 1) == 1) & estop == 0:
+    estop, pf, fuleffout, medeffout, loweffout, fulleffin, medeffin, loweffin = loadtest.runloadtest(wattage, load)
+    if pf == 1:
+        passedtests |= 0b00100
