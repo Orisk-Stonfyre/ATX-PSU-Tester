@@ -5,6 +5,8 @@ import initialization
 import control
 import CapacitanceTest
 import loadtest
+import voltagetest
+import efficiency
 import os
 
 temp=0
@@ -56,11 +58,16 @@ if ((tests >> 4) & 1) == 1:
         passedtests |= 0b10000
 
 if (((tests >> 3) & 1) == 1) & estop == 0:
-    estop, pf, fulload, medload, lowload = loadtest.runloadtest(wattage, load)
+    estop, pf, fuleffout, medeffout, loweffout, fulleffin, medeffin, loweffin = efficiency.runefftest(wattage, load)
     if pf == 1:
         passedtests |= 0b01000
 
 if (((tests >> 2) & 1) == 1) & estop == 0:
-    estop, pf, fuleffout, medeffout, loweffout, fulleffin, medeffin, loweffin = loadtest.runloadtest(wattage, load)
+    estop, pf, fulload, medload, lowload = loadtest.runloadtest(wattage, load)
     if pf == 1:
         passedtests |= 0b00100
+
+if (((tests >> 0) & 1) == 1) & estop == 0:
+    estop, pf, pin1, pin2, pin4, pin6, pin9, pin10,  pin11, pin12, pin13, pin14, pin21, pin22, pin23 = voltagetest.volatgetest(volt)
+    if pf == 1:
+        passedtests |= 0b00001
