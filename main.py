@@ -58,7 +58,7 @@ if ((tests >> 4) & 1) == 1:
         passedtests |= 0b10000
 
 if (((tests >> 3) & 1) == 1) & estop == 0:
-    estop, pf, fuleffout, medeffout, loweffout, fulleffin, medeffin, loweffin = efficiency.runefftest(wattage, load)
+    estop, pf, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin = efficiency.runefftest(wattage, load)
     if pf == 1:
         passedtests |= 0b01000
 
