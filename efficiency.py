@@ -281,11 +281,17 @@ low_map = {
 def runefftest(wattage,loadselect):
     estop = 0
     fullvoltageout = 0
+    fullcurrentout = 0
     medvoltageout = 0
+    medcurrentout = 0
     lowvoltageout = 0
+    lowcurrentout = 0
     fullvoltagein = 0
+    fullcurrentin = 0
     medvoltagein = 0
+    medcurrentin = 0
     lowvoltagein = 0
+    lowcurrentin = 0
     pf = 1
     if ((loadselect >> 2) & 1) == 1:
         control.deasertallrelays()
@@ -304,16 +310,22 @@ def runefftest(wattage,loadselect):
             lowvoltageout = spicmds.readv2()
             print("Voltage Out")
             print(lowvoltageout)
+            lowcurrentout = spicmds.readi1()
+            print("Current Out")
+            print(lowcurrentout)
             lowvoltagein = spicmds.readv1()
             print("Voltage In")
             print(lowvoltagein)
+            lowcurrentin = spicmds.readi2()
+            print("Current In")
+            print(lowcurrentin)
             control.deasertpson()
             print("Power Down")
             control.deasert12vrelays()
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
-            if (lowvoltageout / lowvoltagein) >= 1 | (lowvoltageout / lowvoltagein) <= 1 :  # needs corrected
+            if ((lowvoltageout / lowvoltagein) >= 1 | (lowvoltageout / lowvoltagein) <= 1) & ((lowcurrentout / lowcurrentin) >= 1 | (lowcurrentout / lowcurrentin) <= 1):  # needs corrected
                 pf = 0
                 print("Low Load Efficiency Test Failed")
             else:
@@ -340,16 +352,22 @@ def runefftest(wattage,loadselect):
             medvoltageout = spicmds.readv2()
             print("Voltage Out")
             print(medvoltageout)
+            medcurrentout = spicmds.readi1()
+            print("Current Out")
+            print(medcurrentout)
             medvoltagein = spicmds.readv1()
             print("Voltage In")
             print(medvoltagein)
+            medcurrentin = spicmds.readi1()
+            print("Current In")
+            print(medcurrentin)
             control.deasertpson()
             print("Power Down")
             control.deasert12vrelays()
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
-            if (medvoltageout / medvoltagein) >= 1 | (medvoltageout / medvoltagein) <= 1:  # needs corrected
+            if ((medvoltageout / medvoltagein) >= 1 | (medvoltageout / medvoltagein) <= 1) & ((medcurrentout / medcurrentin) >= 1 | (medcurrentout / medcurrentin) <= 1):  # needs corrected
                 pf = 0
                 print("Med Load Test Efficiency Failed")
             else:
@@ -376,16 +394,22 @@ def runefftest(wattage,loadselect):
             fullvoltageout = spicmds.readv2()
             print("Voltage Out")
             print(fullvoltageout)
+            fullcurrentout = spicmds.readi1()
+            print("Current Out")
+            print(fullcurrentout)
             fullvoltagein = spicmds.readv1()
             print("Voltage In")
             print(fullvoltagein)
+            fullcurrentin = spicmds.readi1()
+            print("Current In")
+            print(fullcurrentin)
             control.deasertpson()
             print("Power Down")
             control.deasert12vrelays()
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
-            if (fullvoltageout / fullvoltagein) >= 1 | (fullvoltageout / fullvoltagein) <= 1: #needs corrected
+            if ((fullvoltageout / fullvoltagein) >= 1 | (fullvoltageout / fullvoltagein) <= 1) & ((fullcurrentout / fullcurrentin) >= 1 | (fullcurrentout / fullcurrentin) <= 1): #needs corrected
                 pf = 0
                 print("Full Load Test Efficiency Failed")
             else:
@@ -395,4 +419,4 @@ def runefftest(wattage,loadselect):
             estop = 1
             print("Fatal Error : All Tests Stopped : Power Supply Unstable")
 
-    return estop, pf, fullvoltageout, medvoltageout, lowvoltageout, fullvoltagein, medvoltagein, lowvoltagein
+    return estop, pf, fullvoltageout, medvoltageout, lowvoltageout, fullvoltagein, medvoltagein, lowvoltagein, fullcurrentout, medcurrentout, lowcurrentout, fullcurrentin, medcurrentin, lowcurrentin
