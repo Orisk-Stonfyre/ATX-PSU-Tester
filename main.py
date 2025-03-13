@@ -7,6 +7,7 @@ import CapacitanceTest
 import loadtest
 import voltagetest
 import efficiency
+import rippletest
 import os
 
 temp=0
@@ -49,7 +50,7 @@ user = input("Enter User: ")
 serial = input("Enter Serial Number: ")
 estop = 0
 
-tests, load, eff, volt = testselect.testsel()
+tests, load, eff, volt, ripple = testselect.testsel()
 passedtests = 0
 
 if ((tests >> 4) & 1) == 1:
@@ -67,7 +68,13 @@ if (((tests >> 2) & 1) == 1) & estop == 0:
     if pf == 1:
         passedtests |= 0b00100
 
-if (((tests >> 0) & 1) == 1) & estop == 0:
-    estop, pf, pin1, pin2, pin4, pin6, pin9, pin10,  pin11, pin12, pin13, pin14, pin21, pin22, pin23 = voltagetest.volatgetest(volt)
+if (((tests >> 1) & 1) == 1) & estop == 0:
+    estop, pf, pin1, pin2, pin4, pin6, pin9, pin10,  pin11, pin12, pin13, pin14, pin21, pin22, pin23 = rippletest.runrippletest(ripple)
     if pf == 1:
         passedtests |= 0b00001
+
+if (((tests >> 0) & 1) == 1) & estop == 0:
+    estop, pf, pin1, pin2, pin4, pin6, pin9, pin10,  pin11, pin12, pin13, pin14, pin21, pin22, pin23 = voltagetest.voltagetest(volt)
+    if pf == 1:
+        passedtests |= 0b00001
+
