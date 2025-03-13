@@ -182,4 +182,52 @@ def testsel():
                 print("Invalid input please select a valid pin or q to quit")
     os.system('cls' if os.name == 'nt' else 'clear')
 
-    return tests, load, eff, volt
+    val = ''
+    ripple = 0 #made an error and added 2 pins that dont exist in bit 0 and 1 deleted them but left bit if needed later so last 2 bits always 0
+    if ((tests >> 0) & 1) == 1: #may also need to redo the pinout or ad diffrent configs basedon connector type, asumine std 24 pin connector
+        while val.lower() != 'q':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            printvolt(ripple)
+            print("\n")
+            val = input("Ripple Test Configuration (By pin #)\n 1: +3.3v\n 2: +3.3v\n 4: +5v\n 6: +5v\n 9: +5v (Standby)\n 10: +12v\n 11: +12v\n 12: +3.3v\n 13: +3.3v\n 14: -12v\n 21: +5v\n 22: +5v\n 23: +5v\n 5v: All 5v Pins\n 3.3v: All 3.3v Pins\n 12v: all 12v Pins\n a: All Pins\n r: reset Selected Pins\n q: Quit Selection\n")
+            if val == '1':
+                ripple |= 0b100000000000000
+            elif val == '2':
+                ripple |= 0b010000000000000
+            elif val == '4':
+                ripple |= 0b001000000000000
+            elif val == '6':
+                ripple |= 0b000100000000000
+            elif val == '9':
+                ripple |= 0b000010000000000
+            elif val == '10':
+                ripple |= 0b000001000000000
+            elif val == '11':
+                ripple |= 0b000000100000000
+            elif val == '12':
+                ripple |= 0b000000010000000
+            elif val == '13':
+                ripple |= 0b000000001000000
+            elif val == '14':
+                ripple |= 0b000000000100000
+            elif val == '21':
+                ripple |= 0b000000000010000
+            elif val == '22':
+                ripple |= 0b000000000001000
+            elif val == '23':
+                ripple |= 0b000000000000100
+            elif val == '5v':
+                ripple |= 0b001110000011100
+            elif val == '3.3v':
+                ripple |= 0b110000011000000
+            elif val == '12v':
+                ripple |= 0b000001100100000
+            elif val == 'a':
+                ripple |= 0b111111111111100
+            elif val == 'r':
+                ripple = 0
+            elif val.lower() != 'q':
+                print("Invalid input please select a valid pin or q to quit")
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+    return tests, load, eff, volt, ripple
