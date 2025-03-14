@@ -1,8 +1,6 @@
-
-import time
+import report
 import testselect
 import initialization
-import control
 import CapacitanceTest
 import loadtest
 import voltagetest
@@ -10,6 +8,8 @@ import efficiency
 import rippletest
 import os
 
+passedtests= tests= load= eff= volt= ripple= wattage= date= user= serial= fullvout= medvout= lowvout= fullvin= medvin= lowvin= fullcout= medcout= lowcout= fullcin= medcin= lowcin= fulload= medload= lowload= rpin1= rpin2= rpin4= rpin6= rpin9= rpin10=  rpin11= rpin12= rpin13= rpin14= rpin21= rpin22= rpin23= vpin1= vpin2= vpin4= vpin6= vpin9= vpin10=  vpin11= vpin12= vpin13= vpin14= vpin21= vpin22= vpin23 = 0
+initialization.init()
 temp=0
 while 0 == temp:
     wattage = input("Enter Wattage of Power Supply: \n 400\n430\n500\n550\n600\n650\n700\n750\n800\n850\n900\n950\n1000")
@@ -62,7 +62,7 @@ if ((tests >> 4) & 1) == 1:
         allpass = 0
 
 if (((tests >> 3) & 1) == 1) & estop == 0:
-    estop, pf, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin = efficiency.runefftest(wattage, load)
+    estop, pf, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin = efficiency.runefftest(wattage, eff)
     if pf == 1:
         passedtests |= 0b01000
     else:
@@ -107,3 +107,4 @@ if estop == 0:
         if (((passedtests >> 0) & 1) == 0) & ((tests >> 0) & 1) == 1:
             print("Voltage Test Failed")
     print("Compiling Test Data in Report")
+    report.compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, user, serial, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin, fulload, medload, lowload, rpin1, rpin2, rpin4, rpin6, rpin9, rpin10,  rpin11, rpin12, rpin13, rpin14, rpin21, rpin22, rpin23, vpin1, vpin2, vpin4, vpin6, vpin9, vpin10,  vpin11, vpin12, vpin13, vpin14, vpin21, vpin22, vpin23)
