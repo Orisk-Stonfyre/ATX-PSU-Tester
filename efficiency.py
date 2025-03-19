@@ -304,20 +304,20 @@ def runefftest(wattage,loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if psok == 5:
+        if (psok >= 2.4) | (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             lowvoltageout = spicmds.readv2()
             print("Voltage Out")
             print(lowvoltageout)
-            lowcurrentout = spicmds.readi1()
+            lowcurrentout = spicmds.readi2()
             print("Current Out")
             print(lowcurrentout)
             lowvoltagein = spicmds.readv1()
-            print("Voltage In")
+            print("Voltage In (rms)")
             print(lowvoltagein)
-            lowcurrentin = spicmds.readi2()
-            print("Current In")
+            lowcurrentin = spicmds.readi1()
+            print("Current In (rms)")
             print(lowcurrentin)
             control.deasertpson()
             print("Power Down")
@@ -325,7 +325,10 @@ def runefftest(wattage,loadselect):
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
-            if ((lowvoltageout / lowvoltagein) >= 1 | (lowvoltageout / lowvoltagein) <= 1) & ((lowcurrentout / lowcurrentin) >= 1 | (lowcurrentout / lowcurrentin) <= 1):  # needs corrected
+            pout = lowcurrentout * lowvoltageout
+            pin = lowcurrentin * lowvoltagein
+            eff = pout / pin
+            if eff < .65:
                 pf = 0
                 print("Low Load Efficiency Test Failed")
             else:
@@ -346,7 +349,7 @@ def runefftest(wattage,loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if psok == 5:
+        if (psok >= 2.4) | (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             medvoltageout = spicmds.readv2()
@@ -356,10 +359,10 @@ def runefftest(wattage,loadselect):
             print("Current Out")
             print(medcurrentout)
             medvoltagein = spicmds.readv1()
-            print("Voltage In")
+            print("Voltage In (rms)")
             print(medvoltagein)
             medcurrentin = spicmds.readi1()
-            print("Current In")
+            print("Current In (rms)")
             print(medcurrentin)
             control.deasertpson()
             print("Power Down")
@@ -367,7 +370,10 @@ def runefftest(wattage,loadselect):
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
-            if ((medvoltageout / medvoltagein) >= 1 | (medvoltageout / medvoltagein) <= 1) & ((medcurrentout / medcurrentin) >= 1 | (medcurrentout / medcurrentin) <= 1):  # needs corrected
+            pout = medcurrentout * medvoltageout
+            pin = medcurrentin * medvoltagein
+            eff = pout / pin
+            if eff < .72:  # needs corrected
                 pf = 0
                 print("Med Load Test Efficiency Failed")
             else:
@@ -388,7 +394,7 @@ def runefftest(wattage,loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if psok == 5:
+        if (psok >= 2.4) | (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             fullvoltageout = spicmds.readv2()
@@ -398,10 +404,10 @@ def runefftest(wattage,loadselect):
             print("Current Out")
             print(fullcurrentout)
             fullvoltagein = spicmds.readv1()
-            print("Voltage In")
+            print("Voltage In (rms)")
             print(fullvoltagein)
             fullcurrentin = spicmds.readi1()
-            print("Current In")
+            print("Current In (rms)")
             print(fullcurrentin)
             control.deasertpson()
             print("Power Down")
@@ -409,7 +415,10 @@ def runefftest(wattage,loadselect):
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
-            if ((fullvoltageout / fullvoltagein) >= 1 | (fullvoltageout / fullvoltagein) <= 1) & ((fullcurrentout / fullcurrentin) >= 1 | (fullcurrentout / fullcurrentin) <= 1): #needs corrected
+            pout = fullcurrentout * fullvoltageout
+            pin = fullcurrentin * fullvoltagein
+            eff = pout / pin
+            if eff < .70: #needs corrected
                 pf = 0
                 print("Full Load Test Efficiency Failed")
             else:

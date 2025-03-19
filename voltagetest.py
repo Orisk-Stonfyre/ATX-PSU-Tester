@@ -23,7 +23,7 @@ def voltagetest(pins):
     print("Power On")
     time.sleep(.5)
     psok = spicmds.readpsok()
-    if psok == 5: #needs changed
+    if (psok >= 2.4) | (psok <= 5): #needs changed
         if ((pins >> 14) & 1) == 1:
             print("Testing Pin 1")
             control.asertpin1()
@@ -37,7 +37,7 @@ def voltagetest(pins):
             print(pin1)
             control.deasertpin1()
             print("MOSFET Deaserted")
-            if 1<pin1<1:#not in range
+            if (pin1 < 3.14) | (pin1 > 3.47):#not in range
                 pf = 0
                 print("Pin 1 Test Failed")
             else:
@@ -55,7 +55,7 @@ def voltagetest(pins):
             print(pin2)
             control.deasertpin2()
             print("MOSFET Deaserted")
-            if 1<pin2<1:#not in range
+            if (pin2 < 3.14) | (pin2 > 3.47):#not in range
                 pf = 0
                 print("Pin 2 Test Failed")
             else:
@@ -73,7 +73,7 @@ def voltagetest(pins):
             print(pin4)
             control.deasertpin4()
             print("MOSFET Deaserted")
-            if 1<pin4<1:#not in range
+            if (pin4 < 4.75) | (pin4 > 5.25):#not in range
                 pf = 0
                 print("Pin 4 Test Failed")
             else:
@@ -90,7 +90,7 @@ def voltagetest(pins):
             print("Pin 6 Voltage")
             print(pin6)
             control.deasertpin6()
-            if 1<pin6<1:#not in range
+            if (pin6 < 4.75) | (pin6 > 5.25):#not in range
                 pf = 0
                 print("Pin 6 Test Failed")
             else:
@@ -109,7 +109,7 @@ def voltagetest(pins):
             print(pin9)
             control.deasertpin9()
             print("MOSFET Deaserted")
-            if 1<pin9<1:#not in range
+            if (pin9 < 4.75) | (pin9 > 5.25):#not in range
                 pf = 0
                 print("Pin 9 Test Failed")
             else:
@@ -127,7 +127,7 @@ def voltagetest(pins):
             print(pin10)
             control.deasertpin10()
             print("MOSFET Deaserted")
-            if 1<pin10<1:#not in range
+            if (pin10 < 11.40) | (pin10 > 12.60):#not in range
                 pf = 0
                 print("Pin 10 Test Failed")
             else:
@@ -145,7 +145,7 @@ def voltagetest(pins):
             print(pin11)
             control.deasertpin11()
             print("MOSFET Deaserted")
-            if 1<pin11<1:#not in range
+            if (pin11 < 11.40) | (pin11 > 12.60):#not in range
                 pf = 0
                 print("Pin 11 Test Failed")
             else:
@@ -163,7 +163,7 @@ def voltagetest(pins):
             print(pin12)
             control.deasertpin12()
             print("MOSFET Deaserted")
-            if 1<pin12<1:#not in range
+            if (pin12 < 3.14) | (pin12 > 3.47):#not in range
                 pf = 0
                 print("Pin 12 Test Failed")
             else:
@@ -181,7 +181,7 @@ def voltagetest(pins):
             print(pin13)
             control.deasertpin13()
             print("MOSFET Deaserted")
-            if 1<pin13<1:#not in range
+            if (pin13 < 3.14) | (pin13 > 3.47):#not in range
                 pf = 0
                 print("Pin 13 Test Failed")
             else:
@@ -199,7 +199,7 @@ def voltagetest(pins):
             print(pin14)
             control.deasertpin14()
             print("MOSFET Deaserted")
-            if 1<pin14<1:#not in range
+            if (pin14 < -13.2) | (pin14 > -10.8):#not in range
                 pf = 0
                 print("Pin 14 Test Failed")
             else:
@@ -217,7 +217,7 @@ def voltagetest(pins):
             print(pin21)
             control.deasertpin21()
             print("MOSFET Deaserted")
-            if 1<pin21<1:#not in range
+            if (pin21 < 4.75) | (pin21 > 5.25):#not in range
                 pf = 0
                 print("Pin 21 Test Failed")
             else:
@@ -235,7 +235,7 @@ def voltagetest(pins):
             print(pin22)
             control.deasertpin22()
             print("MOSFET Deaserted")
-            if 1<pin22<1:#not in range
+            if (pin22 < 4.75) | (pin22 > 5.25):#not in range
                 pf = 0
                 print("Pin 22 Test Failed")
             else:
@@ -253,7 +253,7 @@ def voltagetest(pins):
             print(pin23)
             control.deasertpin23()
             print("MOSFET Deaserted")
-            if 1<pin23<1:#not in range
+            if (pin23 < 4.75) | (pin23 > 5.25):#not in range
                 pf = 0
                 print("Pin 23 Test Failed")
             else:

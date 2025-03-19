@@ -21,7 +21,7 @@ def capacitancetest():
     control.deasert12vrelays()
     control.deasertcaprelay()
     time.sleep(5)
-    if psok == 5:#needs ajusted acording to tested values
+    if (psok >= 2.4) | (psok <= 5):
         print("Capacitance Test Complete, Value Nominal")
         return 1
     else:

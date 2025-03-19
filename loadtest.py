@@ -298,7 +298,7 @@ def runloadtest(wattage, loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if psok == 5:
+        if (psok >= 2.4) | (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             lowvoltage = spicmds.readv2()
@@ -309,7 +309,7 @@ def runloadtest(wattage, loadselect):
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
-            if lowvoltage != 1: #needs corrected
+            if (lowvoltage > 12.60) | (lowvoltage < 11.40):
                 pf = 0
                 print("Low Load Test Failed")
             else:
@@ -330,7 +330,7 @@ def runloadtest(wattage, loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if psok == 5:
+        if (psok >= 2.4) | (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             medvoltage = spicmds.readv2()
@@ -341,7 +341,7 @@ def runloadtest(wattage, loadselect):
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
-            if medvoltage != 1: #needs corrected
+            if (medvoltage > 12.60) | (medvoltage < 11.40):
                 pf = 0
                 print("Med Load Test Failed")
             else:
@@ -361,7 +361,7 @@ def runloadtest(wattage, loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if psok == 5:
+        if (psok >= 2.4) | (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             fullvoltage = spicmds.readv2()
@@ -372,7 +372,7 @@ def runloadtest(wattage, loadselect):
             control.deasertload()
             print("Relays Deaserted")
             print("Load Deaserted")
-            if fullvoltage != 1: #needs corrected
+            if (fullvoltage > 12.60) | (fullvoltage < 11.40):
                 pf = 0
                 print("Full Load Test Failed")
             else:

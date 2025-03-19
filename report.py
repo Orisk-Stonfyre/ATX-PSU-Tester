@@ -89,11 +89,11 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                         loweff = lowpwro / lowpwri
                         f.write("Low load Efficiency: " + str(loweff) + "\n")
                         f.write("Low load power output: " + str(lowpwro) + "\n")
-                        f.write("Low load power input: " + str(lowpwri) + "\n")
+                        f.write("Low load power input (rms): " + str(lowpwri) + "\n")
                         f.write("Low load voltage output: " + str(lowvout) + "\n")
-                        f.write("Low load voltage input: " + str(lowvin) + "\n")
+                        f.write("Low load voltage input (rms): " + str(lowvin) + "\n")
                         f.write("Low load current output: " + str(lowcout) + "\n")
-                        f.write("Low load current input: " + str(lowcin) + "\n")
+                        f.write("Low load current input (rms): " + str(lowcin) + "\n")
 
                     if ((eff >> 1) & 1) == 1:
                         medpwro = medvout * medcout
@@ -101,23 +101,23 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                         medeff = medpwro / medpwri
                         f.write("Medium load Efficiency: " + str(medeff) + "\n")
                         f.write("Medium load power output: " + str(medpwro) + "\n")
-                        f.write("Medium load power input: " + str(medpwri) + "\n")
+                        f.write("Medium load power input (rms): " + str(medpwri) + "\n")
                         f.write("Medium load voltage output: " + str(medvout) + "\n")
-                        f.write("Medium load voltage input: " + str(medvin) + "\n")
+                        f.write("Medium load voltage input (rms): " + str(medvin) + "\n")
                         f.write("Medium load current output: " + str(medcout) + "\n")
-                        f.write("Medium load current input: " + str(medcin) + "\n")
+                        f.write("Medium load current input (rms): " + str(medcin) + "\n")
 
-                    if ((eff >> 1) & 1) == 1:
+                    if ((eff >> 0) & 1) == 1:
                         fullpwro = fullvout * fullcout
                         fullpwri = fullcout * fullvin
                         fulleff = fullpwro / fullpwri
                         f.write("Full load Efficiency: " + str(fulleff) + "\n")
                         f.write("Full load power output: " + str(fullpwro) + "\n")
-                        f.write("Full load power input: " + str(fullpwri) + "\n")
+                        f.write("Full load power input (rms): " + str(fullpwri) + "\n")
                         f.write("Full load voltage output: " + str(fullvout) + "\n")
-                        f.write("Full load voltage input: " + str(fullvin) + "\n")
+                        f.write("Full load voltage input (rms): " + str(fullvin) + "\n")
                         f.write("Full load current output: " + str(fullcout) + "\n")
-                        f.write("Full load current input: " + str(fullcin) + "\n")
+                        f.write("Full load current input (rms): " + str(fullcin) + "\n")
 
                 if ((tests >> 2) & 1) == 1:
                     f.write("\n Load Test Results:\n")
@@ -200,7 +200,7 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                             f.write("Pin 22 voltage (+5v): " + str(vpin22) + "\n")
                         if ((volt >> 2) & 1) == 1:
                             f.write("Pin 23 voltage (+5v): " + str(vpin23) + "\n")
-                f.write("\n \n End of Report \n Code by Patrick Clark (2025)")
+                f.write("\n \n End of Report\n ATX 2.0 Power Supply Tester V1.0\n Code by Patrick Clark (2025)")
 
         except Exception as e:
             print(f"Error saving data: {e}")
