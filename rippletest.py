@@ -21,16 +21,16 @@ def runrippletest(pins):
     pin22 = 0
     pin23 = 0
 
-    r12 = 120 #max ripple allowed in mv
-    r5 = 50
-    r33 = 50
+    r12 = .120 #max ripple allowed in v
+    r5 = .50
+    r33 = .50
 
     print("Begin Voltage Test")
     control.asertpson()
     print("Power On")
     time.sleep(.5)
     psok = spicmds.readpsok()
-    if psok == 5:  # needs changed
+    if (psok >= 2.4) | (psok <= 5):  # needs changed
         if ((pins >> 14) & 1) == 1:
             max = 0
             min  = 0
@@ -49,7 +49,7 @@ def runrippletest(pins):
             print(pin1)
             control.deasertpin1()
             print("MOSFET Deaserted")
-            if 1<pin1<1:#not in range
+            if pin1 > r33:#not in range
                 pf = 0
                 print("Pin 1 Test Failed")
             else:
@@ -74,7 +74,7 @@ def runrippletest(pins):
             print(pin2)
             control.deasertpin2()
             print("MOSFET Deaserted")
-            if 1<pin2<1:#not in range
+            if pin2 > r33:#not in range
                 pf = 0
                 print("Pin 2 Test Failed")
             else:
@@ -99,7 +99,7 @@ def runrippletest(pins):
             print(pin4)
             control.deasertpin4()
             print("MOSFET Deaserted")
-            if 1<pin4<1:#not in range
+            if pin4 > r5:#not in range
                 pf = 0
                 print("Pin 4 Test Failed")
             else:
@@ -112,7 +112,7 @@ def runrippletest(pins):
             control.asertpin6()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -123,7 +123,7 @@ def runrippletest(pins):
             print("Pin 6 Ripple")
             print(pin6)
             control.deasertpin6()
-            if 1<pin6<1:#not in range
+            if pin6 > r5:#not in range
                 pf = 0
                 print("Pin 6 Test Failed")
             else:
@@ -137,7 +137,7 @@ def runrippletest(pins):
             control.asertpin9()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -149,7 +149,7 @@ def runrippletest(pins):
             print(pin9)
             control.deasertpin9()
             print("MOSFET Deaserted")
-            if 1<pin9<1:#not in range
+            if pin9 > r5:#not in range
                 pf = 0
                 print("Pin 9 Test Failed")
             else:
@@ -162,7 +162,7 @@ def runrippletest(pins):
             control.asertpin10()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -174,7 +174,7 @@ def runrippletest(pins):
             print(pin10)
             control.deasertpin10()
             print("MOSFET Deaserted")
-            if 1<pin10<1:#not in range
+            if pin10 > r12:#not in range
                 pf = 0
                 print("Pin 10 Test Failed")
             else:
@@ -187,7 +187,7 @@ def runrippletest(pins):
             control.asertpin11()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -199,7 +199,7 @@ def runrippletest(pins):
             print(pin11)
             control.deasertpin11()
             print("MOSFET Deaserted")
-            if 1<pin11<1:#not in range
+            if pin11 > r12:#not in range
                 pf = 0
                 print("Pin 11 Test Failed")
             else:
@@ -212,7 +212,7 @@ def runrippletest(pins):
             control.asertpin12()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -224,7 +224,7 @@ def runrippletest(pins):
             print(pin12)
             control.deasertpin12()
             print("MOSFET Deaserted")
-            if 1<pin12<1:#not in range
+            if pin12 > r33:#not in range
                 pf = 0
                 print("Pin 12 Test Failed")
             else:
@@ -237,7 +237,7 @@ def runrippletest(pins):
             control.asertpin13()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -249,7 +249,7 @@ def runrippletest(pins):
             print(pin13)
             control.deasertpin13()
             print("MOSFET Deaserted")
-            if 1<pin13<1:#not in range
+            if pin13 > 3.3:#not in range
                 pf = 0
                 print("Pin 13 Test Failed")
             else:
@@ -262,7 +262,7 @@ def runrippletest(pins):
             control.asertpin14()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -274,7 +274,7 @@ def runrippletest(pins):
             print(pin14)
             control.deasertpin14()
             print("MOSFET Deaserted")
-            if 1<pin14<1:#not in range
+            if pin14 > 12:#not in range
                 pf = 0
                 print("Pin 14 Test Failed")
             else:
@@ -287,7 +287,7 @@ def runrippletest(pins):
             control.asertpin21()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -299,7 +299,7 @@ def runrippletest(pins):
             print(pin21)
             control.deasertpin21()
             print("MOSFET Deaserted")
-            if 1<pin21<1:#not in range
+            if pin21 > r5:#not in range
                 pf = 0
                 print("Pin 21 Test Failed")
             else:
@@ -312,7 +312,7 @@ def runrippletest(pins):
             control.asertpin22()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -324,7 +324,7 @@ def runrippletest(pins):
             print(pin22)
             control.deasertpin22()
             print("MOSFET Deaserted")
-            if 1<pin22<1:#not in range
+            if pin22 > r5:#not in range
                 pf = 0
                 print("Pin 22 Test Failed")
             else:
@@ -337,7 +337,7 @@ def runrippletest(pins):
             control.asertpin23()
             print("MOSFET Aserted")
             print("Measuring Ripple")
-            sum = 0
+
             for i in range(1000):
                 temp = spicmds.readv3()
                 if temp > max:
@@ -349,7 +349,7 @@ def runrippletest(pins):
             print(pin23)
             control.deasertpin23()
             print("MOSFET Deaserted")
-            if 1<pin23<1:#not in range
+            if pin23 > r5:#not in range
                 pf = 0
                 print("Pin 23 Test Failed")
             else:

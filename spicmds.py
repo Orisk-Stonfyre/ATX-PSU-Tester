@@ -1,4 +1,7 @@
 import time
+import math
+
+
 class MockSPI:
     """
     A mock class for spidev or other SPI libraries.  This allows you to run and test
@@ -11,14 +14,14 @@ class MockSPI:
         self.device = device
 
     def open(self, bus, device):
-      print(f"Mock open: Bus: {bus}, Device: {device}")
-      self.bus = bus
-      self.device = device
-      return None
+        print(f"Mock open: Bus: {bus}, Device: {device}")
+        self.bus = bus
+        self.device = device
+        return None
 
     def close(self):
-      print("Mock close")
-      return None
+        print("Mock close")
+        return None
 
     def xfer(self, data):
         print(f"Mock xfer: Data: {data}")
@@ -52,6 +55,7 @@ class MockSPI:
 # How to use it (example using spidev):
 try:
     import spidev  # Try importing the real library first
+
     spi = spidev.SpiDev()
 except ImportError:
     spidev = MockSPI()  # If it fails, use the mock
@@ -60,32 +64,79 @@ except ImportError:
 # library is available.
 
 
-spi.open(0, 0) #bus 0 chip select 0
+spi.open(0, 0)  #bus 0 chip select 0
+
 
 #channel read ftn
 def readadc(channel):
-    if channel <0 or channel >7:
+    if channel < 0 or channel > 7:
         raise ValueError("Channel must be a value 0-7")
-    command = 0b10000000 | (channel << 4) #makes cmd byte
-    spi.xfer2([0x01,command,0x00]) #sends command
+    command = 0b10000000 | (channel << 4)  #makes cmd byte
+    spi.xfer2([0x01, command, 0x00])  #sends command
     data = spi.readbytes(3)  #reads data
-    value = ((data[1] & 3) << 8) + data[2] #first byte null, byte two msb byte 3 lsb
+    value = ((data[1] & 3) << 8) + data[2]  #first byte null, byte two msb byte 3 lsb
     return value
 
+
 def readi2():
-    return readadc(0)
+    val = readadc(0)
+    adc = 5 / 1023
+    conv = 1 / .04  #a/v
+    val = val * adc
+    val = conv * val
+    return val
+
 
 def readv2():
-    return readadc(1)
+    val = readadc(1)
+    adc = 5 / 1023
+    conv = 1 / .32806
+    val = val * adc
+    val = val * conv
+    return val
+
 
 def readv3():
-    return readadc(2)
+    val = readadc(2)
+    adc = 5 / 1023
+    conv = 1 / .328458
+    val = val * adc
+    val = val * conv
+    return val
+
 
 def readpsok():
-    return readadc(3)
+    val = readadc(3)
+    adc = 5 / 1023
+    val = val * adc
+    return val
+
 
 def readv1():
-    return readadc(4)
+    adc = 5 / 1023
+    conv = 1 / .032
+    mean = 0
+    for i in range(1000):
+        val = readadc(4)
+        val = val * adc
+        val = val * conv
+        val = val * val
+        mean += val
+    mean /= 1000
+    mean = math.sqrt(mean)
+    return sum
+
 
 def readi1():
-    return readadc(5)
+    conv = 1 / .04167  #a/v
+    adc = 5 / 1023
+    mean = 0
+    for i in range(1000):
+        val = readadc(5)
+        val = val * adc
+        val = val * conv
+        val = val * val
+        mean += val
+    mean /= 1000
+    mean = math.sqrt(mean)
+    return sum
