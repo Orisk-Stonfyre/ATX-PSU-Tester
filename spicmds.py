@@ -124,7 +124,7 @@ def readv1():
         mean += val
     mean /= 1000
     mean = math.sqrt(mean)
-    return sum
+    return mean
 
 
 def readi1():
@@ -139,4 +139,4 @@ def readi1():
         mean += val
     mean /= 1000
     mean = math.sqrt(mean)
-    return sum
+    return mean

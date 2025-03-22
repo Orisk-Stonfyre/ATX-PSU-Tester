@@ -30,7 +30,7 @@ def runrippletest(pins):
     print("Power On")
     time.sleep(.5)
     psok = spicmds.readpsok()
-    if (psok >= 2.4) | (psok <= 5):  # needs changed
+    if (psok >= 2.4) & (psok <= 5):  # needs changed
         if ((pins >> 14) & 1) == 1:
             max = 0
             min  = 0

@@ -298,7 +298,7 @@ def runloadtest(wattage, loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if (psok >= 2.4) | (psok <= 5):
+        if (psok >= 2.4) & (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             lowvoltage = spicmds.readv2()

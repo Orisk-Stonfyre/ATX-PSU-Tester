@@ -304,7 +304,7 @@ def runefftest(wattage,loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if (psok >= 2.4) | (psok <= 5):
+        if (psok >= 2.4) & (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             lowvoltageout = spicmds.readv2()
@@ -327,7 +327,10 @@ def runefftest(wattage,loadselect):
             print("Load Deaserted")
             pout = lowcurrentout * lowvoltageout
             pin = lowcurrentin * lowvoltagein
-            eff = pout / pin
+            if (pin != 0):
+                eff = pout / pin
+            else:
+                eff = 0
             if eff < .65:
                 pf = 0
                 print("Low Load Efficiency Test Failed")
@@ -372,7 +375,10 @@ def runefftest(wattage,loadselect):
             print("Load Deaserted")
             pout = medcurrentout * medvoltageout
             pin = medcurrentin * medvoltagein
-            eff = pout / pin
+            if (pin != 0):
+                eff = pout / pin
+            else:
+                eff = 0
             if eff < .72:  # needs corrected
                 pf = 0
                 print("Med Load Test Efficiency Failed")
@@ -417,7 +423,10 @@ def runefftest(wattage,loadselect):
             print("Load Deaserted")
             pout = fullcurrentout * fullvoltageout
             pin = fullcurrentin * fullvoltagein
-            eff = pout / pin
+            if (pin != 0):
+                eff = pout / pin
+            else:
+                eff = 0
             if eff < .70: #needs corrected
                 pf = 0
                 print("Full Load Test Efficiency Failed")
