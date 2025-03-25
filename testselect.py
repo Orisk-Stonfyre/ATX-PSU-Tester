@@ -184,7 +184,7 @@ def testsel():
 
     val = ''
     ripple = 0 #made an error and added 2 pins that dont exist in bit 0 and 1 deleted them but left bit if needed later so last 2 bits always 0
-    if ((tests >> 0) & 1) == 1: #may also need to redo the pinout or ad diffrent configs basedon connector type, asumine std 24 pin connector
+    if ((tests >> 1) & 1) == 1: #may also need to redo the pinout or ad diffrent configs basedon connector type, asumine std 24 pin connector
         while val.lower() != 'q':
             os.system('cls' if os.name == 'nt' else 'clear')
             printvolt(ripple)
