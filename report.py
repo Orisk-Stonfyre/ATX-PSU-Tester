@@ -101,7 +101,10 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                     if ((eff >> 1) & 1) == 1:
                         medpwro = medvout * medcout
                         medpwri = medcout * medvin
-                        medeff = medpwro / medpwri
+                        if medpwri != 0:
+                            medeff = medpwro / medpwri
+                        else:
+                            medeff = 0
                         f.write("Medium load Efficiency: " + str(medeff) + "\n")
                         f.write("Medium load power output: " + str(medpwro) + "\n")
                         f.write("Medium load power input (rms): " + str(medpwri) + "\n")
@@ -113,7 +116,10 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                     if ((eff >> 0) & 1) == 1:
                         fullpwro = fullvout * fullcout
                         fullpwri = fullcout * fullvin
-                        fulleff = fullpwro / fullpwri
+                        if fullpwri != 0:
+                            fulleff = lowpwro / lowpwri
+                        else:
+                            fulleff = 0
                         f.write("Full load Efficiency: " + str(fulleff) + "\n")
                         f.write("Full load power output: " + str(fullpwro) + "\n")
                         f.write("Full load power input (rms): " + str(fullpwri) + "\n")

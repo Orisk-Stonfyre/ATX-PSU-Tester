@@ -12,7 +12,7 @@ passedtests= tests= load= eff= volt= ripple= wattage= date= user= serial= fullvo
 initialization.init()
 temp=0
 while 0 == temp:
-    wattage = input("Enter Wattage of Power Supply: \n 400\n430\n500\n550\n600\n650\n700\n750\n800\n850\n900\n950\n1000")
+    wattage = input("Enter Wattage of Power Supply: \n400\n430\n500\n550\n600\n650\n700\n750\n800\n850\n900\n950\n1000\n")
     temp =1
     if wattage == "400":
         wattage = 400
