@@ -1,6 +1,6 @@
 import time
 RETRY_DELAY = 0.05
-MAX_RETRIES = 3
+MAX_RETRIES = 100
 class MockSMBus:
     """
     A mock class for smbus or smbus2.  This allows you to run and test

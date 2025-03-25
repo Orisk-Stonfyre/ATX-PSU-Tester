@@ -86,7 +86,10 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                     if ((eff >> 2) & 1) == 1:
                         lowpwro = lowvout * lowcout
                         lowpwri = lowcout * lowvin
-                        loweff = lowpwro / lowpwri
+                        if lowpwri != 0:
+                            loweff = lowpwro / lowpwri
+                        else:
+                            loweff = 0
                         f.write("Low load Efficiency: " + str(loweff) + "\n")
                         f.write("Low load power output: " + str(lowpwro) + "\n")
                         f.write("Low load power input (rms): " + str(lowpwri) + "\n")

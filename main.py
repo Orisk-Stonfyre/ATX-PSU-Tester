@@ -90,7 +90,6 @@ if (((tests >> 0) & 1) == 1) and estop == 0:
         allpass = 0
 
 
-os.system('cls' if os.name == 'nt' else 'clear')
 print("Tests Complete")
 if allpass == 1:
     print("All Tests Passed")
