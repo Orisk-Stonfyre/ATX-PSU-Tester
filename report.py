@@ -52,19 +52,19 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                     f.write("Capacitance Test: Pass\n")
                 if (((passedtests >> 3) & 1) == 0) & ((tests >> 3) & 1) == 1:
                     f.write("Efficiency Test: Fail\n")
-                elif (((passedtests >> 3) & 1) == 1) & ((tests >> 4) & 1) == 1:
+                elif (((passedtests >> 3) & 1) == 1) & ((tests >> 3) & 1) == 1:
                     f.write("Efficiency Test: Pass\n")
                 if (((passedtests >> 2) & 1) == 0) & ((tests >> 2) & 1) == 1:
                     f.write("Load Test: Fail\n")
-                elif (((passedtests >> 2) & 1) == 1) & ((tests >> 4) & 1) == 1:
+                elif (((passedtests >> 2) & 1) == 1) & ((tests >> 2) & 1) == 1:
                     f.write("Load Test: Pass\n")
                 if (((passedtests >> 1) & 1) == 0) & ((tests >> 1) & 1) == 1:
                     f.write("Ripple Test: Fail\n")
-                elif (((passedtests >> 1) & 1) == 1) & ((tests >> 4) & 1) == 1:
+                elif (((passedtests >> 1) & 1) == 1) & ((tests >> 1) & 1) == 1:
                     f.write("Ripple Test: Pass\n")
                 if (((passedtests >> 0) & 1) == 0) & ((tests >> 0) & 1) == 1:
                     f.write("Voltage Test: Fail\n")
-                elif (((passedtests >> 0) & 1) == 1) & ((tests >> 4) & 1) == 1:
+                elif (((passedtests >> 0) & 1) == 1) & ((tests >> 0) & 1) == 1:
                     f.write("Voltage Test: Pass\n")
 
                 f.write("\n Detailed Test Results Below:\n")
@@ -117,7 +117,7 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                         fullpwro = fullvout * fullcout
                         fullpwri = fullcout * fullvin
                         if fullpwri != 0:
-                            fulleff = lowpwro / lowpwri
+                            fulleff = fullpwro / fullpwri
                         else:
                             fulleff = 0
                         f.write("Full load Efficiency: " + str(fulleff) + "\n")
@@ -130,7 +130,7 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
 
                 if ((tests >> 2) & 1) == 1:
                     f.write("\n Load Test Results:\n")
-                    if ((passedtests >> 3) & 1) == 1:
+                    if ((passedtests >> 2) & 1) == 1:
                         f.write("Power supply operated under load per ATX 2.0 Specifications\n")
                     else:
                         f.write("Power supply was unable to operate under load per ATX 2.0 Specifications\n")
@@ -144,7 +144,7 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
 
                 if ((tests >> 1) & 1) == 1:
                     f.write("\n Ripple Test Results:\n")
-                    if ((passedtests >> 3) & 1) == 1:
+                    if ((passedtests >> 1) & 1) == 1:
                         f.write("DC ripple conformed to ATX 2.0 Specifications\n")
                     else:
                         f.write("DC ripple did not conform to ATX 2.0 Specifications\n")
@@ -178,7 +178,7 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
 
                     if ((tests >> 0) & 1) == 1:
                         f.write("\n Voltage Test Results:\n")
-                        if ((passedtests >> 3) & 1) == 1:
+                        if ((passedtests >> 0) & 1) == 1:
                             f.write("DC voltage conformed to ATX 2.0 Specifications\n")
                         else:
                             f.write("DC voltage did not conform to ATX 2.0 Specifications\n")
