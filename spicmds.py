@@ -65,15 +65,16 @@ except ImportError:
 
 
 spi.open(0, 0)  #bus 0 chip select 0
-
+spi.max_speed_hz = 1000000 # 1 MHz
+spi.mode = 0b00          # Mode 0,0
 
 #channel read ftn
 def readadc(channel):
     if channel < 0 or channel > 7:
         raise ValueError("Channel must be a value 0-7")
     command = 0b10000000 | (channel << 4)  #makes cmd byte
-    spi.xfer2([0x01, command, 0x00])  #sends command
-    data = spi.readbytes(3)  #reads data
+    transfer_command = [0x01, command, 0x00]
+    data = spi.xfer2(transfer_command)
     value = ((data[1] & 3) << 8) + data[2]  #first byte null, byte two msb byte 3 lsb
     return value
 
