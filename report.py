@@ -10,7 +10,7 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
             # Find the USB drive (assuming only one is connected)
         
 
-filepath = os.path.join(mountpnt, filename)
+            filepath = os.path.join(mountpnt, filename)
 
             # Check if the mount point itself exists and is a directory
             if not os.path.isdir(mountpnt):
