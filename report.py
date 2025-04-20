@@ -8,19 +8,33 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
         loop = 0
         try:
             # Find the USB drive (assuming only one is connected)
-            usbdrive = None
-            for item in os.listdir(mountpnt):
-                fullpath = os.path.join(mountpnt, item)
-                if os.path.isdir(fullpath):
-                    usbdrive = fullpath
-                    break
+        
 
-            if usbdrive is None:
-                print("No USB drive found.")
-                loop = 1
+filepath = os.path.join(mountpnt, filename)
 
+            # Check if the mount point itself exists and is a directory
+            if not os.path.isdir(mountpnt):
+                print(f"Error: Mount point {mountpnt} is not a valid directory.")
+                print("Please ensure the USB drive is mounted correctly.")
+                # Optional: Add a more specific check if it's actually mounted
+                # if not os.path.ismount(mountpnt):
+                #     print(f"Warning: {mountpnt} does not appear to be a mount point.")
+                loop = 1 # Set loop to trigger retry logic if desired
+            else:
+                # Mount point looks okay, proceed with writing attempt
+                print(f"Attempting to write directly to: {filepath}")
+                with open(filepath, "a") as f:
+                    # --- ALL YOUR f.write() CALLS GO HERE ---
+                    f.write("Power Supply Test Report\n")
+                    # ... (rest of your f.write statements) ...
+                    f.write("\n \n End of Report\n ATX 2.0 Power Supply Tester V1.0\n Code by Patrick Clark (2025)")
+                    # --- End of your f.write() calls ---
 
-            filepath = os.path.join(usbdrive, filename)
+                    # **Crucial additions for USB drives (KEEP THESE)**
+                    f.flush()              # Force Python's buffer to OS
+                    os.fsync(f.fileno())   # Force OS buffer to physical disk
+
+                print(f"Successfully wrote report to {filepath}")
 
             with open(filepath, "a") as f:
                 f.write("Power Supply Test Report\n")
