@@ -210,7 +210,8 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                         if ((volt >> 2) & 1) == 1:
                             f.write("Pin 23 voltage (+5v): " + str(vpin23) + "\n")
                 f.write("\n \n End of Report\n ATX 2.0 Power Supply Tester V1.0\n Code by Patrick Clark (2025)")
-
+                f.flush()              # Force Python's buffer to OS
+                os.fsync(f.fileno())   # Force OS buffer to physical disk
         except Exception as e:
             print(f"Error saving data: {e}")
             loop = 1
