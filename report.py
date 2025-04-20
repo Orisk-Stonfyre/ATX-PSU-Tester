@@ -1,7 +1,7 @@
 import os
 
 def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, user, serial, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin, fulload, medload, lowload, rpin1, rpin2, rpin4, rpin6, rpin9, rpin10,  rpin11, rpin12, rpin13, rpin14, rpin21, rpin22, rpin23, vpin1, vpin2, vpin4, vpin6, vpin9, vpin10,  vpin11, vpin12, vpin13, vpin14, vpin21, vpin22, vpin23):
-    mountpnt = "/media/pi/"
+    mountpnt = "/media/usb/"
     filename = "TestReport_" + serial + "_" + date + ".txt"
     loop = 1
     while loop == 1:
