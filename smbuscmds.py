@@ -64,7 +64,7 @@ except ImportError:
 #O2 adress 101 0x25
 #O3 adress 001 0x21
 IO_O1 = 0x26
-IO_O2 = 0x24
+IO_O2 = 0x25
 IO_O3 = 0x23
 
 
