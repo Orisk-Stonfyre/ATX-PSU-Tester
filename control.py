@@ -32,15 +32,15 @@ def asertb1load():
     smbuscmds.updatepin(3,"a",6,1)#pin 3-27
     smbuscmds.updatepin(3, "a", 1, 1)  # pin 3-22
     smbuscmds.updatepin(3, "a", 0, 1)  # pin 3-21
-    smbuscmds.updatepin(3, "b", 6, 1)  # pin 3-7
-    smbuscmds.updatepin(3, "b", 7, 1)  # pin 3-8
+    smbuscmds.updatepin(3, "b", 6, 1)  # pin 3-7 *******NEEDS CORRECTED PIN CHANGE
+    smbuscmds.updatepin(3, "b", 7, 1)  # pin 3-8 *******NEEDS CORRECTED PIN CHANGE
 
 def deasertb1load():
     smbuscmds.updatepin(3, "a", 6, 0)  # pin 3-27
     smbuscmds.updatepin(3, "a", 1, 0)  # pin 3-22
     smbuscmds.updatepin(3, "a", 0, 0)  # pin 3-21
-    smbuscmds.updatepin(3, "b", 6, 0)  # pin 3-7
-    smbuscmds.updatepin(3, "b", 7, 0)  # pin 3-8
+    smbuscmds.updatepin(3, "b", 6, 0)  # pin 3-7 *******NEEDS CORRECTED PIN CHANGE
+    smbuscmds.updatepin(3, "b", 7, 0)  # pin 3-8 *******NEEDS CORRECTED PIN CHANGE
 
 def asertb2load():
     smbuscmds.updatepin(3,"a",5,1)  # pin 3-26
@@ -100,14 +100,14 @@ def deasertload():
     deasertb10load()
 
 def asertr1load():
-    smbuscmds.updatepin(3,"b",7,1)#pin 3-8
+    smbuscmds.updatepin(3,"b",7,1)#pin 3-8 *******NEEDS CORRECTED PIN CHANGE
 def deasertr1load():
-    smbuscmds.updatepin(3, "b", 7, 0)  # pin 3-8
+    smbuscmds.updatepin(3, "b", 7, 0)  # pin 3-8 *******NEEDS CORRECTED PIN CHANGE
 
 def asertr2load():
-    smbuscmds.updatepin(3,"b",6,1)#pin 3-7
+    smbuscmds.updatepin(3,"b",6,1)#pin 3-7 *******NEEDS CORRECTED PIN CHANGE
 def deasertr2load():
-    smbuscmds.updatepin(3, "b", 6, 0)  # pin 3-7
+    smbuscmds.updatepin(3, "b", 6, 0)  # pin 3-7 *******NEEDS CORRECTED PIN CHANGE
 
 def asertr3load():
     smbuscmds.updatepin(3,"a",0,1)#pin 3-21

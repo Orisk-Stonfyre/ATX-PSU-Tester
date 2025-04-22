@@ -7,6 +7,7 @@ import voltagetest
 import efficiency
 import rippletest
 import os
+import control
 
 passedtests= tests= load= eff= volt= ripple= wattage= date= user= serial= fullvout= medvout= lowvout= fullvin= medvin= lowvin= fullcout= medcout= lowcout= fullcin= medcin= lowcin= fulload= medload= lowload= rpin1= rpin2= rpin4= rpin6= rpin9= rpin10=  rpin11= rpin12= rpin13= rpin14= rpin21= rpin22= rpin23= vpin1= vpin2= vpin4= vpin6= vpin9= vpin10=  vpin11= vpin12= vpin13= vpin14= vpin21= vpin22= vpin23 = 0
 initialization.init()
@@ -56,6 +57,7 @@ passedtests = 0
 
 if ((tests >> 4) & 1) == 1:
     captest = CapacitanceTest.capacitancetest()
+    control.deasertallrelays()
     if captest == 1:
         passedtests |= 0b10000
     else:
@@ -63,6 +65,7 @@ if ((tests >> 4) & 1) == 1:
 
 if (((tests >> 3) & 1) == 1) and estop == 0:
     estop, pf, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin = efficiency.runefftest(wattage, eff)
+    control.deasertallrelays()
     if pf == 1:
         passedtests |= 0b01000
     else:
@@ -70,6 +73,7 @@ if (((tests >> 3) & 1) == 1) and estop == 0:
 
 if (((tests >> 2) & 1) == 1) and estop == 0:
     estop, pf, fulload, medload, lowload = loadtest.runloadtest(wattage, load)
+    control.deasertallrelays()
     if pf == 1:
         passedtests |= 0b00100
     else:
@@ -77,6 +81,7 @@ if (((tests >> 2) & 1) == 1) and estop == 0:
 
 if (((tests >> 1) & 1) == 1) and estop == 0:
     estop, pf, rpin1, rpin2, rpin4, rpin6, rpin9, rpin10,  rpin11, rpin12, rpin13, rpin14, rpin21, rpin22, rpin23 = rippletest.runrippletest(ripple)
+    control.deasertallrelays()
     if pf == 1:
         passedtests |= 0b00010
     else:
@@ -84,6 +89,7 @@ if (((tests >> 1) & 1) == 1) and estop == 0:
 
 if (((tests >> 0) & 1) == 1) and estop == 0:
     estop, pf, vpin1, vpin2, vpin4, vpin6, vpin9, vpin10,  vpin11, vpin12, vpin13, vpin14, vpin21, vpin22, vpin23 = voltagetest.voltagetest(volt)
+    control.deasertallrelays()
     if pf == 1:
         passedtests |= 0b00001
     else:
