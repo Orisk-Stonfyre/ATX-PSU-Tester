@@ -323,6 +323,7 @@ def runefftest(wattage,loadselect):
             print("Power Down")
             control.deasert12vrelays()
             control.deasertload()
+            control.deasertallrelays()
             print("Relays Deaserted")
             print("Load Deaserted")
             pout = lowcurrentout * lowvoltageout
@@ -371,6 +372,7 @@ def runefftest(wattage,loadselect):
             print("Power Down")
             control.deasert12vrelays()
             control.deasertload()
+            control.deasertallrelays()
             print("Relays Deaserted")
             print("Load Deaserted")
             pout = medcurrentout * medvoltageout
@@ -419,6 +421,7 @@ def runefftest(wattage,loadselect):
             print("Power Down")
             control.deasert12vrelays()
             control.deasertload()
+            control.deasertallrelays()
             print("Relays Deaserted")
             print("Load Deaserted")
             pout = fullcurrentout * fullvoltageout
