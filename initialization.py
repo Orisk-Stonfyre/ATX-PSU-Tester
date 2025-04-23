@@ -19,8 +19,7 @@ def init():
     refv2 = spicmds.readv2()
     refv3 = spicmds.readv3()
     refpsok = spicmds.readpsok()
-    refv1 = spicmds.readv1()
-    refi1 = spicmds.readi1()
+
 
     #deasert all relays
     smbuscmds.setalllow() #deasserts all relays
