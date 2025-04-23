@@ -5,7 +5,7 @@ import time
 
 
 def runrippletest(pins):
-    pf = 0
+    pf = 1
     estop = 0
     pin1 = 0
     pin2 = 0
@@ -22,8 +22,8 @@ def runrippletest(pins):
     pin23 = 0
 
     r12 = .120 #max ripple allowed in v
-    r5 = .50
-    r33 = .50
+    r5 = .050
+    r33 = .050
 
     print("Begin Voltage Test")
     control.asertpson()
@@ -31,10 +31,10 @@ def runrippletest(pins):
     print("Power On")
     time.sleep(.5)
     psok = spicmds.readpsok()
-    if (psok >= 2.4) & (psok <= 5):  # needs changed
+    if (psok >= 2.4) & (psok <= 5):
         if ((pins >> 14) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 1")
             control.asertpin1()
             print("MOSFET Aserted")
@@ -58,11 +58,11 @@ def runrippletest(pins):
                 
         if ((pins >> 13) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 2")
             control.asertpin2()
             print("MOSFET Aserted")
-            print("Measuring Voltage")
+            print("Measuring Ripple")
             sum = 0
             for i in range(1000):
                 temp = spicmds.readv3()
@@ -83,11 +83,11 @@ def runrippletest(pins):
                 
         if ((pins >> 12) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 4")
             control.asertpin4()
             print("MOSFET Aserted")
-            print("Measuring Voltage")
+            print("Measuring Ripple")
             sum = 0
             for i in range(1000):
                 temp = spicmds.readv3()
@@ -108,7 +108,7 @@ def runrippletest(pins):
                 
         if ((pins >> 11) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 6")
             control.asertpin6()
             print("MOSFET Aserted")
@@ -133,7 +133,7 @@ def runrippletest(pins):
             
         if ((pins >> 10) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 9")
             control.asertpin9()
             print("MOSFET Aserted")
@@ -158,7 +158,7 @@ def runrippletest(pins):
                 
         if ((pins >> 9) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 10")
             control.asertpin10()
             print("MOSFET Aserted")
@@ -183,7 +183,7 @@ def runrippletest(pins):
                 
         if ((pins >> 8) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 11")
             control.asertpin11()
             print("MOSFET Aserted")
@@ -208,7 +208,7 @@ def runrippletest(pins):
                 
         if ((pins >> 7) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 12")
             control.asertpin12()
             print("MOSFET Aserted")
@@ -233,7 +233,7 @@ def runrippletest(pins):
                 
         if ((pins >> 6) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 13")
             control.asertpin13()
             print("MOSFET Aserted")
@@ -250,7 +250,7 @@ def runrippletest(pins):
             print(pin13)
             control.deasertpin13()
             print("MOSFET Deaserted")
-            if pin13 > 3.3:#not in range
+            if pin13 > r33:#not in range
                 pf = 0
                 print("Pin 13 Test Failed")
             else:
@@ -258,7 +258,7 @@ def runrippletest(pins):
                 
         if ((pins >> 5) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 14")
             control.asertpin14()
             print("MOSFET Aserted")
@@ -275,7 +275,7 @@ def runrippletest(pins):
             print(pin14)
             control.deasertpin14()
             print("MOSFET Deaserted")
-            if pin14 > 12:#not in range
+            if pin14 > r12:#not in range
                 pf = 0
                 print("Pin 14 Test Failed")
             else:
@@ -283,7 +283,7 @@ def runrippletest(pins):
                 
         if ((pins >> 4) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 21")
             control.asertpin21()
             print("MOSFET Aserted")
@@ -308,7 +308,7 @@ def runrippletest(pins):
                 
         if ((pins >> 3) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 22")
             control.asertpin22()
             print("MOSFET Aserted")
@@ -333,7 +333,7 @@ def runrippletest(pins):
                 
         if ((pins >> 2) & 1) == 1:
             max = 0
-            min  = 0
+            min = 10000
             print("Testing Pin 23")
             control.asertpin23()
             print("MOSFET Aserted")

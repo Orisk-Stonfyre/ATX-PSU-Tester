@@ -24,7 +24,7 @@ def voltagetest(pins):
     print("Power On")
     time.sleep(.5)
     psok = spicmds.readpsok()
-    if (psok >= 2.4) & (psok <= 5): #needs changed
+    if (psok >= 2.4) & (psok <= 5):
         if ((pins >> 14) & 1) == 1:
             print("Testing Pin 1")
             control.asertpin1()
@@ -70,6 +70,7 @@ def voltagetest(pins):
             for i in range(1000):
                 sum += spicmds.readv3()
             pin4 = sum / 1000
+            pin4 += .83
             print("Pin 4 Voltage")
             print(pin4)
             control.deasertpin4()
@@ -88,6 +89,7 @@ def voltagetest(pins):
             for i in range(1000):
                 sum += spicmds.readv3()
             pin6 = sum / 1000
+            pin6 += .83
             print("Pin 6 Voltage")
             print(pin6)
             control.deasertpin6()
@@ -106,6 +108,7 @@ def voltagetest(pins):
             for i in range(1000):
                 sum += spicmds.readv3()
             pin9 = sum / 1000
+            pin9 += .83
             print("Pin 9 Voltage")
             print(pin9)
             control.deasertpin9()
@@ -124,6 +127,7 @@ def voltagetest(pins):
             for i in range(1000):
                 sum += spicmds.readv3()
             pin10 = sum / 1000
+            pin10 += 7.83
             print("Pin 10 Voltage")
             print(pin10)
             control.deasertpin10()
@@ -142,6 +146,7 @@ def voltagetest(pins):
             for i in range(1000):
                 sum += spicmds.readv3()
             pin11 = sum / 1000
+            pin11 += 7.83
             print("Pin 11 Voltage")
             print(pin11)
             control.deasertpin11()
@@ -196,6 +201,7 @@ def voltagetest(pins):
             for i in range(1000):
                 sum += spicmds.readv3()
             pin14 = sum / 1000
+            pin14 += -12.173
             print("Pin 14 Voltage")
             print(pin14)
             control.deasertpin14()
@@ -214,6 +220,7 @@ def voltagetest(pins):
             for i in range(1000):
                 sum += spicmds.readv3()
             pin21 = sum / 1000
+            pin21 += .83
             print("Pin 21 Voltage")
             print(pin21)
             control.deasertpin21()
@@ -232,6 +239,7 @@ def voltagetest(pins):
             for i in range(1000):
                 sum += spicmds.readv3()
             pin22 = sum / 1000
+            pin22 += .83
             print("Pin 22 Voltage")
             print(pin22)
             control.deasertpin22()
@@ -250,6 +258,7 @@ def voltagetest(pins):
             for i in range(1000):
                 sum += spicmds.readv3()
             pin23 = sum / 1000
+            pin23 += .83
             print("Pin 23 Voltage")
             print(pin23)
             control.deasertpin23()
