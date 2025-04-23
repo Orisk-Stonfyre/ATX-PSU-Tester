@@ -308,6 +308,7 @@ def runloadtest(wattage, loadselect):
             print("Power Down")
             control.deasert12vrelays()
             control.deasertload()
+            control.deasertallrelays()
             print("Relays Deaserted")
             print("Load Deaserted")
             if (lowvoltage > 12.60) | (lowvoltage < 11.40):
@@ -341,6 +342,7 @@ def runloadtest(wattage, loadselect):
             print("Power Down")
             control.deasert12vrelays()
             control.deasertload()
+            control.deasertallrelays()
             print("Relays Deaserted")
             print("Load Deaserted")
             if (medvoltage > 12.60) | (medvoltage < 11.40):
@@ -373,6 +375,7 @@ def runloadtest(wattage, loadselect):
             print("Power Down")
             control.deasert12vrelays()
             control.deasertload()
+            control.deasertallrelays()
             print("Relays Deaserted")
             print("Load Deaserted")
             if (fullvoltage > 12.60) | (fullvoltage < 11.40):

@@ -20,7 +20,7 @@ def capacitancetest():
     print("Power Deaserting all Relays")
     control.deasert12vrelays()
     control.deasertcaprelay()
-    time.sleep(5)
+    control.deasertallrelays()
     if (psok >= 2.4) & (psok <= 5):
         print("Capacitance Test Complete, Value Nominal")
         return 1
