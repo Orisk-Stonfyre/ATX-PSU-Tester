@@ -112,32 +112,25 @@ def readpsok():
     val = val * adc
     return val
 
-
-def readv1():
-    adc = 5 / 1023
+def readinput():
+    adc = 5 /1023
     conv = 1 / .032
-    mean = 0
+    convi = 1 / .04167
+    vavg = 0
+    iavg = 0
+    pavg = 0
     for i in range(1000):
-        val = readadc(4)
-        val = val * adc
-        val = val * conv
-        val = val * val
-        mean += val
-    mean /= 1000
-    mean = math.sqrt(mean)
-    return mean
-
-
-def readi1():
-    conv = 1 / .04167  #a/v
-    adc = 5 / 1023
-    mean = 0
-    for i in range(1000):
-        val = readadc(5)
-        val = val * adc
-        val = val * conv
-        val = val * val
-        mean += val
-    mean /= 1000
-    mean = math.sqrt(mean)
-    return mean
+        v = readadc(4)
+        i = readadc(5)
+        v = v * adc
+        i = i * adc
+        v = v * conv
+        i = i * convi
+        p = v * i
+        vavg += v
+        iavg += i
+        pavg += p
+    vavg /= 1000
+    iavg /= 1000
+    pavg /= 1000
+    return vavg, iavg, pavg

@@ -20,6 +20,7 @@ def voltagetest(pins):
     estop = 0 #needs vals changed in comparison for pass/fail
     print("Begin Voltage Test")
     control.asertpson()
+    time.sleep(3)
     print("Power On")
     time.sleep(.5)
     psok = spicmds.readpsok()

@@ -27,6 +27,7 @@ def runrippletest(pins):
 
     print("Begin Voltage Test")
     control.asertpson()
+    time.sleep(3)
     print("Power On")
     time.sleep(.5)
     psok = spicmds.readpsok()

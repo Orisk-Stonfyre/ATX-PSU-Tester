@@ -1,6 +1,6 @@
 import os
 
-def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, user, serial, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin, fulload, medload, lowload, rpin1, rpin2, rpin4, rpin6, rpin9, rpin10,  rpin11, rpin12, rpin13, rpin14, rpin21, rpin22, rpin23, vpin1, vpin2, vpin4, vpin6, vpin9, vpin10,  vpin11, vpin12, vpin13, vpin14, vpin21, vpin22, vpin23):
+def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, user, serial, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin, fulload, medload, lowload, rpin1, rpin2, rpin4, rpin6, rpin9, rpin10,  rpin11, rpin12, rpin13, rpin14, rpin21, rpin22, rpin23, vpin1, vpin2, vpin4, vpin6, vpin9, vpin10,  vpin11, vpin12, vpin13, vpin14, vpin21, vpin22, vpin23,fullpin,medpin,lowpin):
     mountpnt = "/media/usb/"
     filename = "TestReport_" + serial + "_" + date + ".txt"
     loop = 1
@@ -99,7 +99,7 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
                     f.write("\n Recorded efficiency and related values:\n")
                     if ((eff >> 2) & 1) == 1:
                         lowpwro = lowvout * lowcout
-                        lowpwri = lowcout * lowvin
+                        lowpwri = lowpin
                         if lowpwri != 0:
                             loweff = lowpwro / lowpwri
                         else:
@@ -114,7 +114,7 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
 
                     if ((eff >> 1) & 1) == 1:
                         medpwro = medvout * medcout
-                        medpwri = medcout * medvin
+                        medpwri = medpin
                         if medpwri != 0:
                             medeff = medpwro / medpwri
                         else:
@@ -129,7 +129,7 @@ def compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, us
 
                     if ((eff >> 0) & 1) == 1:
                         fullpwro = fullvout * fullcout
-                        fullpwri = fullcout * fullvin
+                        fullpwri = fullpin
                         if fullpwri != 0:
                             fulleff = fullpwro / fullpwri
                         else:

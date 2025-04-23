@@ -292,6 +292,9 @@ def runefftest(wattage,loadselect):
     medcurrentin = 0
     lowvoltagein = 0
     lowcurrentin = 0
+    fullpin = 0
+    medpin = 0
+    lowpin = 0
     pf = 1
     if ((loadselect >> 2) & 1) == 1:
         control.deasertallrelays()
@@ -301,6 +304,7 @@ def runefftest(wattage,loadselect):
         control.asert12vrelays()
         print("Relays Aserted")
         control.asertpson()
+        time.sleep(3)
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
@@ -313,10 +317,9 @@ def runefftest(wattage,loadselect):
             lowcurrentout = spicmds.readi2()
             print("Current Out")
             print(lowcurrentout)
-            lowvoltagein = spicmds.readv1()
+            lowvoltagein, lowcurrentin, lowpin = spicmds.readinput()
             print("Voltage In (rms)")
             print(lowvoltagein)
-            lowcurrentin = spicmds.readi1()
             print("Current In (rms)")
             print(lowcurrentin)
             control.deasertpson()
@@ -326,9 +329,8 @@ def runefftest(wattage,loadselect):
             print("Relays Deaserted")
             print("Load Deaserted")
             pout = lowcurrentout * lowvoltageout
-            pin = lowcurrentin * lowvoltagein
-            if (pin != 0):
-                eff = pout / pin
+            if (lowpin != 0):
+                eff = pout / lowpin
             else:
                 eff = 0
             if eff < .65:
@@ -349,6 +351,7 @@ def runefftest(wattage,loadselect):
         control.asert12vrelays()
         print("Relays Aserted")
         control.asertpson()
+        time.sleep(3)
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
@@ -358,13 +361,12 @@ def runefftest(wattage,loadselect):
             medvoltageout = spicmds.readv2()
             print("Voltage Out")
             print(medvoltageout)
-            medcurrentout = spicmds.readi1()
+            medcurrentout = spicmds.readi2()
             print("Current Out")
             print(medcurrentout)
-            medvoltagein = spicmds.readv1()
+            medvoltagein, medcurrentin, medpin = spicmds.readinput()
             print("Voltage In (rms)")
             print(medvoltagein)
-            medcurrentin = spicmds.readi1()
             print("Current In (rms)")
             print(medcurrentin)
             control.deasertpson()
@@ -374,9 +376,8 @@ def runefftest(wattage,loadselect):
             print("Relays Deaserted")
             print("Load Deaserted")
             pout = medcurrentout * medvoltageout
-            pin = medcurrentin * medvoltagein
-            if (pin != 0):
-                eff = pout / pin
+            if (medpin != 0):
+                eff = pout / medpin
             else:
                 eff = 0
             if eff < .72:  # needs corrected
@@ -397,6 +398,7 @@ def runefftest(wattage,loadselect):
         control.asert12vrelays()
         print("Relays Aserted")
         control.asertpson()
+        time.sleep(3)
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
@@ -406,13 +408,12 @@ def runefftest(wattage,loadselect):
             fullvoltageout = spicmds.readv2()
             print("Voltage Out")
             print(fullvoltageout)
-            fullcurrentout = spicmds.readi1()
+            fullcurrentout = spicmds.readi2()
             print("Current Out")
             print(fullcurrentout)
-            fullvoltagein = spicmds.readv1()
+            fullvoltagein, fullcurrentin, fullpin = spicmds.readinput()
             print("Voltage In (rms)")
             print(fullvoltagein)
-            fullcurrentin = spicmds.readi1()
             print("Current In (rms)")
             print(fullcurrentin)
             control.deasertpson()
@@ -423,8 +424,8 @@ def runefftest(wattage,loadselect):
             print("Load Deaserted")
             pout = fullcurrentout * fullvoltageout
             pin = fullcurrentin * fullvoltagein
-            if (pin != 0):
-                eff = pout / pin
+            if (fullpin != 0):
+                eff = pout / fullpin
             else:
                 eff = 0
             if eff < .70: #needs corrected
@@ -437,4 +438,4 @@ def runefftest(wattage,loadselect):
             estop = 1
             print("Fatal Error : All Tests Stopped : Power Supply Unstable")
 
-    return estop, pf, fullvoltageout, medvoltageout, lowvoltageout, fullvoltagein, medvoltagein, lowvoltagein, fullcurrentout, medcurrentout, lowcurrentout, fullcurrentin, medcurrentin, lowcurrentin
+    return estop, pf, fullvoltageout, medvoltageout, lowvoltageout, fullvoltagein, medvoltagein, lowvoltagein, fullcurrentout, medcurrentout, lowcurrentout, fullcurrentin, medcurrentin, lowcurrentin, fullpin, medpin, lowpin

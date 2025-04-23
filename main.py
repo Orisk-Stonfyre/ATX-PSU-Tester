@@ -8,7 +8,7 @@ import efficiency
 import rippletest
 import os
 
-passedtests= tests= load= eff= volt= ripple= wattage= date= user= serial= fullvout= medvout= lowvout= fullvin= medvin= lowvin= fullcout= medcout= lowcout= fullcin= medcin= lowcin= fulload= medload= lowload= rpin1= rpin2= rpin4= rpin6= rpin9= rpin10=  rpin11= rpin12= rpin13= rpin14= rpin21= rpin22= rpin23= vpin1= vpin2= vpin4= vpin6= vpin9= vpin10=  vpin11= vpin12= vpin13= vpin14= vpin21= vpin22= vpin23 = 0
+passedtests= tests= load= eff= volt= ripple= wattage= date= user= serial= fullvout= medvout= lowvout= fullvin= medvin= lowvin= fullcout= medcout= lowcout= fullcin= medcin= lowcin= fulload= medload= lowload= rpin1= rpin2= rpin4= rpin6= rpin9= rpin10=  rpin11= rpin12= rpin13= rpin14= rpin21= rpin22= rpin23= vpin1= vpin2= vpin4= vpin6= vpin9= vpin10=  vpin11= vpin12= vpin13= vpin14= vpin21= vpin22= vpin23=fullpin=medpin=lowpin = 0
 initialization.init()
 temp=0
 while 0 == temp:
@@ -62,7 +62,7 @@ if ((tests >> 4) & 1) == 1:
         allpass = 0
 
 if (((tests >> 3) & 1) == 1) and estop == 0:
-    estop, pf, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin = efficiency.runefftest(wattage, eff)
+    estop, pf, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin,fullpin,medpin,lowpin = efficiency.runefftest(wattage, eff)
     if pf == 1:
         passedtests |= 0b01000
     else:
@@ -106,4 +106,4 @@ else:
     if (((passedtests >> 0) & 1) == 0) and ((tests >> 0) & 1) == 1:
         print("Voltage Test Failed")
 print("Compiling Test Data in Report")
-report.compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, user, serial, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin, fulload, medload, lowload, rpin1, rpin2, rpin4, rpin6, rpin9, rpin10,  rpin11, rpin12, rpin13, rpin14, rpin21, rpin22, rpin23, vpin1, vpin2, vpin4, vpin6, vpin9, vpin10,  vpin11, vpin12, vpin13, vpin14, vpin21, vpin22, vpin23)
+report.compilereport(passedtests, tests, load, eff, volt, ripple, wattage, date, user, serial, fullvout, medvout, lowvout, fullvin, medvin, lowvin, fullcout, medcout, lowcout, fullcin, medcin, lowcin, fulload, medload, lowload, rpin1, rpin2, rpin4, rpin6, rpin9, rpin10,  rpin11, rpin12, rpin13, rpin14, rpin21, rpin22, rpin23, vpin1, vpin2, vpin4, vpin6, vpin9, vpin10,  vpin11, vpin12, vpin13, vpin14, vpin21, vpin22, vpin23,fullpin,medpin,lowpin)
