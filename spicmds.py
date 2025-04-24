@@ -125,6 +125,7 @@ def readinput():
         v = v * adc
         i = i * adc
         v = v * conv
+        v = v * 3.2
         i = i * convi
         p = v * i
         vavg += v
