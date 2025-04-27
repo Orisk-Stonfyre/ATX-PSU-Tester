@@ -1,4 +1,3 @@
-import time
 import math
 
 
@@ -128,10 +127,14 @@ def readinput():
         v = v * 3.2
         i = i * convi
         p = v * i
+        v = v * v
+        i = i * i
         vavg += v
         iavg += i
         pavg += p
     vavg /= 1000
+    vavg = math.sqrt(vavg)
     iavg /= 1000
+    iavg = math.sqrt(iavg)
     pavg /= 1000
     return vavg, iavg, pavg

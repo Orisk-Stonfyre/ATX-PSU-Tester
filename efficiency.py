@@ -329,6 +329,20 @@ def runefftest(wattage,loadselect):
             control.deasertallrelays()
             print("Relays Deaserted")
             print("Load Deaserted")
+            if lowvoltageout == 0:
+                control.asertpson()
+                time.sleep(3)
+                control.asertpin10()
+                sum = 0
+                for i in range(1000):
+                    sum += spicmds.readv3()
+                control.deasertallrelays()
+                control.deasertpin10()
+                control.deasertpson()
+                lowvoltageout = sum / 1000
+                lowvoltageout += 7.83
+                #if lowcurrentin > 20:
+                   # lowcurrentin = 
             pout = lowcurrentout * lowvoltageout
             if (lowpin != 0):
                 eff = pout / lowpin
@@ -377,6 +391,18 @@ def runefftest(wattage,loadselect):
             control.deasertallrelays()
             print("Relays Deaserted")
             print("Load Deaserted")
+            if medvoltageout == 0:
+                control.asertpson()
+                time.sleep(3)
+                control.asertpin10()
+                sum = 0
+                for i in range(1000):
+                    sum += spicmds.readv3()
+                control.deasertallrelays()
+                control.deasertpin10()
+                control.deasertpson()
+                medvoltageout = sum / 1000
+                medvoltageout += 7.83
             pout = medcurrentout * medvoltageout
             if (medpin != 0):
                 eff = pout / medpin
@@ -425,8 +451,19 @@ def runefftest(wattage,loadselect):
             control.deasertallrelays()
             print("Relays Deaserted")
             print("Load Deaserted")
+            if fullvoltageout == 0:
+                control.asertpson()
+                time.sleep(3)
+                control.asertpin10()
+                sum = 0
+                for i in range(1000):
+                    sum += spicmds.readv3()
+                control.deasertallrelays()
+                control.deasertpin10()
+                control.deasertpson()
+                fullvoltageout = sum / 1000
+                fullvoltageout += 7.83
             pout = fullcurrentout * fullvoltageout
-            pin = fullcurrentin * fullvoltagein
             if (fullpin != 0):
                 eff = pout / fullpin
             else:

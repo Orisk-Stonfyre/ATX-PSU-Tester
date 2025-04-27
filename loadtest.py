@@ -1,9 +1,9 @@
-from os import waitpid
 
-import  control
+
+import control
 import time
 import spicmds
-from control import deasertpson
+
 
 
 def asert400full():
@@ -303,6 +303,18 @@ def runloadtest(wattage, loadselect):
             print("Power Nominal")
             print("Measuring load")
             lowvoltage = spicmds.readv2()
+            if lowvoltage == 0:
+                control.asertpson()
+                time.sleep(3)
+                control.asertpin10()
+                sum = 0
+                for i in range(1000):
+                    sum += spicmds.readv3()
+                control.deasertallrelays()
+                control.deasertpin10()
+                control.deasertpson()
+                lowvoltage = sum / 1000
+                lowvoltage += 7.83
             print(lowvoltage)
             control.deasertpson()
             print("Power Down")
@@ -337,6 +349,18 @@ def runloadtest(wattage, loadselect):
             print("Power Nominal")
             print("Measuring load")
             medvoltage = spicmds.readv2()
+            if medvoltage == 0:
+                control.asertpson()
+                time.sleep(3)
+                control.asertpin10()
+                sum = 0
+                for i in range(1000):
+                    sum += spicmds.readv3()
+                control.deasertallrelays()
+                control.deasertpin10()
+                control.deasertpson()
+                medvoltage = sum / 1000
+                medvoltage += 7.83
             print(medvoltage)
             control.deasertpson()
             print("Power Down")
@@ -370,6 +394,18 @@ def runloadtest(wattage, loadselect):
             print("Power Nominal")
             print("Measuring load")
             fullvoltage = spicmds.readv2()
+            if fullvoltage == 0:
+                control.asertpson()
+                time.sleep(3)
+                control.asertpin10()
+                sum = 0
+                for i in range(1000):
+                    sum += spicmds.readv3()
+                control.deasertallrelays()
+                control.deasertpin10()
+                control.deasertpson()
+                fullvoltage = sum / 1000
+                fullvoltage += 7.83
             print(fullvoltage)
             control.deasertpson()
             print("Power Down")
