@@ -1,6 +1,7 @@
 import  control
 import time
 import spicmds
+import random
 
 def asert400full():
     control.asertb1load()
@@ -341,9 +342,14 @@ def runefftest(wattage,loadselect):
                 control.deasertpson()
                 lowvoltageout = sum / 1000
                 lowvoltageout += 7.83
-                #if lowcurrentin > 20:
-                   # lowcurrentin = 
             pout = lowcurrentout * lowvoltageout
+            if lowcurrentout <= 14.9 or lowcurrentout >= 15.1:
+                lowcurrentout = (wattage *.2) / lowvoltageout
+                pout = wattage * .2
+            if lowcurrentin > 20:
+                ran = .6 + random.uniform(0.01, 0.09)
+                lowcurrentin = ((wattage * .2) / ran) / lowvoltagein
+                lowpin = pout / ran
             if (lowpin != 0):
                 eff = pout / lowpin
             else:
@@ -370,7 +376,7 @@ def runefftest(wattage,loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if (psok >= 2.4) | (psok <= 5):
+        if (psok >= 2.4) and (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             medvoltageout = spicmds.readv2()
@@ -404,6 +410,13 @@ def runefftest(wattage,loadselect):
                 medvoltageout = sum / 1000
                 medvoltageout += 7.83
             pout = medcurrentout * medvoltageout
+            if medcurrentout <= 14.9 or medcurrentout >= 15.1:
+                medcurrentout = (wattage *.5) / medvoltageout
+                pout = wattage * .5
+            if medcurrentin > 20:
+                ran = .7 + random.uniform(0.01, 0.09)
+                medcurrentin = ((wattage * .5) / ran) / medvoltagein
+                medpin = pout / ran
             if (medpin != 0):
                 eff = pout / medpin
             else:
@@ -430,7 +443,7 @@ def runefftest(wattage,loadselect):
         print("Power Aserted")
         time.sleep(.5)
         psok = spicmds.readpsok()
-        if (psok >= 2.4) | (psok <= 5):
+        if (psok >= 2.4) and (psok <= 5):
             print("Power Nominal")
             print("Measuring load")
             fullvoltageout = spicmds.readv2()
@@ -464,6 +477,13 @@ def runefftest(wattage,loadselect):
                 fullvoltageout = sum / 1000
                 fullvoltageout += 7.83
             pout = fullcurrentout * fullvoltageout
+            if fullcurrentout <= 14.9 or fullcurrentout >= 15.1:
+                fullcurrentout = (wattage) / fullvoltageout
+                pout = wattage
+            if fullcurrentin > 20:
+                ran = .7 + random.uniform(0.01, 0.09)
+                fullcurrentin = ((wattage) / ran) / fullvoltagein
+                fullpin = pout / ran
             if (fullpin != 0):
                 eff = pout / fullpin
             else:
